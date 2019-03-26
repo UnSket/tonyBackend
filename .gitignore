@@ -1,0 +1,42 @@
+dist
+flow-coverage
+stats.json
+yarn.lock
+
+### Excel ###
+src/modules/tasks/__snapshots__/solution.xlsx
+\~\$*.xlsx
+
+### Vim ###
+tags
+.tern-port
+.tern-project
+
+### macOS ###
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+### Node ###
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+coverage
+node_modules/
+.npm
+.eslintcache
+.node_repl_history
+*.tgz
+.yarn-integrity
+.env
+
+### WebStorm ###
+.idea
+*.iws
+.idea_modules/
+# *.iml
+# modules.xml
+# *.ipr

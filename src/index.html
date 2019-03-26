@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Поиграй со мной</h1>
+<div style="display: flex; justify-content: space-around; text-align: center">
+    <div>
+        <h2>Запрос на получение данных</h2>
+        <form id="queryForm" name="form" method="POST">
+            <input name="query" type="text" placeholder="Введите graphql запрос"/>
+            <button type="submit">Запросить</button>
+        </form>
+        <div style="white-space: pre; text-align: left; background: #9cfffc; margin-top: 20px;" id="queryAnswer"></div>
+    </div>
+    <div>
+        <h2>Запрос на изменение данных</h2>
+        <form id="mutationForm" name="form" method="POST">
+            <input name="mutation" type="text" placeholder="Введите graphql запрос"/>
+            <button type="submit">Запросить</button>
+        </form>
+        <div style="white-space: pre; text-align: left; background: #9cfffc; margin-top: 20px;" id="mutationAnswer"></div>
+    </div>
+</div>
+<form id="login">
+    <input type="text" name="username" placeholder="Введите имя пользователя">
+    <input type="password" name="password" placeholder="Введите пароль">
+    <button type="submit">Войти</button>
+    <p class="response"></p>
+</form>
+<script src="index.js"></script>
+</body>
+</html>
