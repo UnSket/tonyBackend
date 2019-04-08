@@ -7,6 +7,8 @@
     "@babel/preset-env": "^7.4.2",
     "body-parser": "^1.18.3",
     "connect-flash": "^0.1.1",
+    "connect-mongo": "^2.0.3",
+    "cookie-parser": "^1.4.4",
     "express": "^4.16.4",
     "express-graphql": "^0.7.1",
     "express-session": "^1.15.6",
@@ -23,7 +25,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start-server": "babel server -d lib"
+    "start-server": "babel server --delete-dir-on-start -d server/dist -s true && node server/dist/index.js"
   },
   "author": "vlad tsvetkov",
   "license": "ISC"

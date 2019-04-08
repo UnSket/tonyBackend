@@ -1,15 +1,19 @@
 import passport from 'passport';
 import LocalStrategy from 'passport-local';
+import {findUserByID} from '../controllers/user';
 
-const setAuthorization = (app) => {
+const setAuthorization = (app, db) => {
     app.use(passport.initialize());
     app.use(passport.session());
     passport.serializeUser(function (user, done) {
-        done(null, user);
+        done(null, user._id);
     });
 
-    passport.deserializeUser(function (user, done) {
-        done(null, user);
+    passport.deserializeUser(function (id, done) {
+        findUserByID(id, db, (err, result) => {
+            console.log(result);
+            done(null, result);
+        });
     });
 
     passport.use('local', new LocalStrategy.Strategy(
@@ -21,28 +25,28 @@ const setAuthorization = (app) => {
                 if (err || !result.length) {
                     return done(null, false, {message: 'user not found'});
                 }
-                console.log(result);
                 done(null, result[0]);
             });
         }
     ));
+
     app.post('/login',
-        function (req, res, next) {
-            passport.authenticate('local', {
+        passport.authenticate('local', {
                 successRedirect: false,
-                failureFlash: true
-            }, function (err, user, info) {
-                if (user) return next();
-                if (err) return res.error(err);
-                res.status(401);
-                return res.send(info);
-            })(req, res, next);
-            //return res.status(401);
-        },
-        function (req, res) {
-            res.status(200);
-            res.send(JSON.stringify(req.user));
-        });
+                failureFlash: true,
+                session: true
+            }),
+            function (req, res) {
+                res.status(200);
+                res.send(JSON.stringify(req.user));
+            });
+
+    passport.authenticationMiddleware = function mustAuthenticated(req, res, next) {
+        if (!req.isAuthenticated()) {
+            return res.status(401).send({});
+        }
+        next();
+    }
 };
 
 export default setAuthorization;

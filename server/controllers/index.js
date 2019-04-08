@@ -1,6 +1,6 @@
 import { buildSchema } from 'graphql';
 
-const schema = buildSchema(`
+export const schema = buildSchema(`
     type Query {
       quoteOfTheDay: String
       random: Float!
@@ -29,7 +29,7 @@ const schema = buildSchema(`
   `);
 
 // The root provides a resolver function for each API endpoint
-const root = {
+export const root = {
     quoteOfTheDay: () => {
         return Math.random() < 0.5 ? 'Take it easy' : 'Salvation lies within';
     },
@@ -63,5 +63,3 @@ const root = {
         }
     }
 };
-
-export default {schema, root};
