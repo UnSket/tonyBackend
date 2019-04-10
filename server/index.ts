@@ -4,7 +4,7 @@ import { MongoClient, Db } from 'mongodb';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 // @ts-ignore
-import * as flash from 'connect-flash';
+import * as flash from 'express-flash';
 import * as session from 'express-session';
 import authorize from './authorization/authorization';
 import * as passport from 'passport';

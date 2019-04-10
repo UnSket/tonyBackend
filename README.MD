@@ -9,6 +9,8 @@
 - Mongo DB
 - GraphQL
 
+
+
 #### run
 
 ```
@@ -22,3 +24,7 @@ npm run watch
 npm install
 npm run build
 ```
+
+#### Useful links
+
+[TypeScript node starter](https://github.com/Microsoft/TypeScript-Node-Starter)
