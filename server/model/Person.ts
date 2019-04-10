@@ -1,7 +1,5 @@
 export class Person {
-    constructor(name, age) {
-        this.name = name;
-        this.age = age;
+    constructor(private name, private age?: number) {
     }
 
     setAge(age) {

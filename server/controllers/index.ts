@@ -1,4 +1,5 @@
 import { buildSchema } from 'graphql';
+import { Person } from '../model/Person';
 
 export const schema = buildSchema(`
     type Query {
@@ -9,12 +10,12 @@ export const schema = buildSchema(`
       me(name: String!, age: Int): Person
       user: Person
     }
-    
+
     type Mutation {
       setUserAge(age: Int!): Person
     }
-  
-    
+
+
     type Person {
       name: String
       age: Int
@@ -38,28 +39,22 @@ export const root = {
             setTimeout(() => {
                 resolve(Math.random());
             }, 5000);
-        })
+        });
     },
     rollThreeDice: () => {
         return [1, 2, 3].map(_ => 1 + Math.floor(Math.random() * 6));
     },
     rollDice: function ({numDice, numSides = 6}) {
-        var output = [];
-        for (var i = 0; i < numDice; i++) {
+        const output = [];
+        for (let i = 0; i < numDice; i++) {
             output.push(1 + Math.floor(Math.random() * (numSides)));
         }
         return output;
     },
     user: () => {
-        return user || new Person('Guest')
+        return new Person('Guest');
     },
     setUserAge: function ({age}) {
-        if (user) {
-            user.age = age;
-            return user;
-        }
-        else {
-            return new Person('Guest', age);
-        }
+        return new Person('Guest', age);
     }
 };

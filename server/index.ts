@@ -1,22 +1,23 @@
-import graphqlHTTP from 'express-graphql';
-import {schema, root} from './controllers/index';
-import {MongoClient} from 'mongodb';
-import express from 'express';
-import bodyParser from "body-parser";
-import flash from 'connect-flash';
-import session from "express-session";
+import * as graphqlHTTP from 'express-graphql';
+import { schema, root } from './controllers';
+import { MongoClient, Db } from 'mongodb';
+import * as express from 'express';
+import * as bodyParser from 'body-parser';
+// @ts-ignore
+import * as flash from 'connect-flash';
+import * as session from 'express-session';
 import authorize from './authorization/authorization';
-import passport from 'passport';
-import cookieParser from "cookie-parser";
+import * as passport from 'passport';
+import * as cookieParser from 'cookie-parser';
+import 'source-map-support/register';
 
 
 MongoClient.connect('mongodb://localhost:27017/animals', function (err, client) {
   if (err) throw err;
 
-  const db = client.db('test');
+  const db: Db = client.db('test');
 
-  // Construct a schema, using GraphQL schema language
-  var app = express();
+  const app: express.Application = express();
 
   const sessionMiddleware = session({
     secret: 'cats',
@@ -35,11 +36,11 @@ MongoClient.connect('mongodb://localhost:27017/animals', function (err, client) 
   app.use(bodyParser.json());
   app.use(flash());
 
-  authorize(app, db);
+  const authenticationMiddleware = authorize(app, db);
 
-  app.use(express.static("src"));
+  app.use(express.static('src'));
 
-  app.use('/graphql', passport.authenticationMiddleware, graphqlHTTP({
+  app.use('/graphql', authenticationMiddleware, graphqlHTTP({
     schema: schema,
     rootValue: root
   }));

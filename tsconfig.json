@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "es6", //компилируем в es6, можно использовать es5 для старых версий нода
+    "module": "commonjs", //импорт модулей преобразуется в commonjs (node require)
+    "sourceMap": true, //генерировать sourceMaps, нужно для отладки
+    "outDir": "dist/server",
+    "rootDir": "server",
+    "baseUrl": ".",
+    "paths": {
+      "*": [
+        "node_modules/*"
+      ]
+    }
+  },
+  //указывает что включаться должны только файлы из папки /src
+  "include": [
+    "server/**/*"
+  ]
+}
