@@ -1,6 +1,6 @@
 import * as passport from 'passport';
 import * as LocalStrategy from 'passport-local';
-import { findUserByID } from '../controllers/user';
+import { findUserByID } from '../services/user';
 
 const setAuthorization = (app, db) => {
     app.use(passport.initialize());
@@ -22,7 +22,7 @@ const setAuthorization = (app, db) => {
         function (req, username, password, done) {
             db.collection('user').find({name: username, password: password})
                 .toArray(function (err, result) {
-                console.log(result, err);
+                console.log(result, err), username, password;
                 if (err || !result.length) {
                     return done(null, false, {message: 'user not found'});
                 }

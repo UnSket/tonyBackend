@@ -6,6 +6,9 @@
     "outDir": "dist/server",
     "rootDir": "server",
     "baseUrl": ".",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "lib": ["es2016", "esnext.asynciterable"],
     "paths": {
       "*": [
         "node_modules/*"
